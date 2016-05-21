@@ -1,6 +1,7 @@
 class Api::V1::PhotosController < ApplicationController
   before_action :set_params, only: [:index]
 
+
   # GET /api/v1/photos?category=nsfw?page=1
   def index
     @photos = HTTParty.get("https://imgur.com/r/#{params[:category]}/page/#{params[:page]}.json")
@@ -15,7 +16,7 @@ class Api::V1::PhotosController < ApplicationController
 
   private
     def set_params
-      params[:page] = 1 if params[:page].nil?
+      params[:page] = 0 if params[:page].nil?
       params[:category] = 'AmateurArchives' if params[:category].nil?
     end
 
